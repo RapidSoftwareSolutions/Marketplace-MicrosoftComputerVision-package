@@ -1,0 +1,179 @@
+{ 
+    "package": "MicrosoftComputerVision",
+    "tagline": "Microsoft Computer Vision API Wrapper",
+    "description": "This blocks allows you to Analyze an image, Read text in images, Generate a thumbnail",
+    "image": "https://assets.onestore.ms/cdnfiles/onestorerolling-1608-23000/shell/v3/images/logo/microsoft.png",
+    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-MicrosoftComputerVision-package",
+    "accounts": {
+        "domain": "microsoft.com",
+        "credentials": [
+            "subscriptionKey"
+        ]
+    },
+    "blocks": [{
+        "name":"analyzeImage",
+        "args":[
+            {
+                "name": "subscriptionKey",
+                "type": "String",
+                "info": "The api key obtained from Microsoft Cognitive Servisces."
+            },
+            {
+                "name": "image",
+                "type": "String",
+                "info": "Supported input methods: raw image binary or image URL."
+            },
+            {
+                "name": "details",
+                "type": "String",
+                "info": "Optional: A string indicating which domain-specific details to return. Multiple values should be comma-separated. Valid visual feature types include: Celebrities."
+            },
+            {
+                "name": "visualFeatures",
+                "type": "String",
+                "info": "Optional: A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Categories, Tags, Description, Faces, Color, Adult."
+            }
+        ],
+        "callbacks":[
+            {
+                "name":"error",
+                "info": "Error"
+            },
+            {
+                "name":"success",
+                "info": "Success => channels: Array <string>"
+            }
+        ]
+    },
+    {
+        "name":"describeImage",
+        "args":[
+            {
+                "name": "subscriptionKey",
+                "type": "String",
+                "info": "The api key obtained from Microsoft Cognitive Servisces."
+            },
+            {
+                "name": "image",
+                "type": "String",
+                "info": "Supported input methods: raw image binary or image URL."
+            },
+            {
+                "name": "maxCandidates",
+                "type": "String",
+                "info": "Optional: Maximum number of candidate descriptions to be returned. The default is 1."
+            }
+        ],
+        "callbacks":[
+            {
+                "name":"error",
+                "info": "Error"
+            },
+            {
+                "name":"success",
+                "info": "Success => channels: Array <string>"
+            }
+        ]
+    },
+    {
+        "name":"getThumbnail",
+        "args":[
+            {
+                "name": "subscriptionKey",
+                "type": "String",
+                "info": "The api key obtained from Microsoft Cognitive Servisces."
+            },
+            {
+                "name": "image",
+                "type": "String",
+                "info": "Supported input methods: raw image binary or image URL."
+            },
+            {
+                "name": "width",
+                "type": "Number",
+                "info": "Width of the thumbnail. It must be between 1 and 1024. Recommended minimum of 50."
+            },
+            {
+                "name": "height",
+                "type": "Number",
+                "info": "Height of the thumbnail. It must be between 1 and 1024. Recommended minimum of 50."
+            },
+            {
+                "name": "smartCropping",
+                "type": "String",
+                "info": "Optional: Boolean flag for enabling smart cropping."
+            }
+        ],
+        "callbacks":[
+            {
+                "name":"error",
+                "info": "Error"
+            },
+            {
+                "name":"success",
+                "info": "Success => channels: Array <string>"
+            }
+        ]
+    },
+    {
+        "name":"ocr",
+        "args":[
+            {
+                "name": "subscriptionKey",
+                "type": "String",
+                "info": "The api key obtained from Microsoft Cognitive Servisces."
+            },
+            {
+                "name": "image",
+                "type": "String",
+                "info": "Supported input methods: raw image binary or image URL."
+            },
+            {
+                "name": "language",
+                "type": "String",
+                "info": "Optional: The BCP-47 language code of the text to be detected in the image.The default value is 'unk', then the service will auto detect the language of the text in the image. Supported languages: unk (AutoDetect), zh-Hans (ChineseSimplified), zh-Hant (ChineseTraditional), cs (Czech), da (Danish), nl (Dutch), en (English), fi (Finnish), fr (French), de (German), el (Greek), hu (Hungarian), it (Italian), Ja (Japanese), ko (Korean), nb (Norwegian), pl (Polish), pt (Portuguese, ru (Russian), es (Spanish), sv (Swedish), tr (Turkish)."
+            },
+            {
+                "name": "detectOrientation",
+                "type": "String",
+                "info": "Optional: Whether detect the text orientation in the image. With detectOrientation=true the OCR service tries to detect the image orientation and correct it before further processing (e.g. if it's upside-down)."
+            }
+        ],
+        "callbacks":[
+            {
+                "name":"error",
+                "info": "Error"
+            },
+            {
+                "name":"success",
+                "info": "Success => channels: Array <string>"
+            }
+        ]
+    },
+    {
+        "name":"tagImage",
+        "args":[
+            {
+                "name": "subscriptionKey",
+                "type": "String",
+                "info": "The api key obtained from Microsoft Cognitive Servisces."
+            },
+            {
+                "name": "image",
+                "type": "String",
+                "info": "Supported input methods: raw image binary or image URL."
+            }
+        ],
+        "callbacks":[
+            {
+                "name":"error",
+                "info": "Error"
+            },
+            {
+                "name":"success",
+                "info": "Success => channels: Array <string>"
+            }
+        ]
+    }
+    ]
+}
