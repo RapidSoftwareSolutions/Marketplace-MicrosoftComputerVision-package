@@ -49,6 +49,6 @@ COPY /conf/php.ini /etc/php7/conf.d/50-setting.ini
 COPY /conf/www.conf /etc/php7/php-fpm.d/www.conf
 COPY /conf/nginx.conf /etc/nginx/nginx.conf
 
-EXPOSE 80
+EXPOSE 8080
 
 CMD ["/usr/local/bin/run.sh"]
