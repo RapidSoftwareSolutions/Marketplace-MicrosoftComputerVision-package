@@ -15,7 +15,7 @@
         "args":[
             {
                 "name": "subscriptionKey",
-                "type": "String",
+                "type": "credentials",
                 "info": "The api key obtained from Microsoft Cognitive Servisces."
             },
             {
@@ -50,7 +50,7 @@
         "args":[
             {
                 "name": "subscriptionKey",
-                "type": "String",
+                "type": "credentials",
                 "info": "The api key obtained from Microsoft Cognitive Servisces."
             },
             {
@@ -80,7 +80,7 @@
         "args":[
             {
                 "name": "subscriptionKey",
-                "type": "String",
+                "type": "credentials",
                 "info": "The api key obtained from Microsoft Cognitive Servisces."
             },
             {
@@ -120,7 +120,7 @@
         "args":[
             {
                 "name": "subscriptionKey",
-                "type": "String",
+                "type": "credentials",
                 "info": "The api key obtained from Microsoft Cognitive Servisces."
             },
             {
@@ -155,7 +155,7 @@
         "args":[
             {
                 "name": "subscriptionKey",
-                "type": "String",
+                "type": "credentials",
                 "info": "The api key obtained from Microsoft Cognitive Servisces."
             },
             {
