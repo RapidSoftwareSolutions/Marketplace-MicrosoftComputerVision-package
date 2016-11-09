@@ -20,7 +20,7 @@
             },
             {
                 "name": "image",
-                "type": "String",
+                "type": "File",
                 "info": "Supported input methods: raw image binary or image URL."
             },
             {
