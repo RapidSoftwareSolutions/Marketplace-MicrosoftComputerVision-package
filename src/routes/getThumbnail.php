@@ -12,21 +12,23 @@ $app->post('/api/MicrosoftComputerVision/getThumbnail', function ($request, $res
     
     $error = [];
     if(empty($post_data['args']['subscriptionKey'])) {
-        $error[] = 'subscriptionKey cannot be empty';
+        $error[] = 'subscriptionKey';
     }
     if(empty($post_data['args']['image'])) {
-        $error[] = 'image cannot be empty';
+        $error[] = 'image';
     }
     if(empty($post_data['args']['width'])) {
-        $error[] = 'width cannot be empty';
+        $error[] = 'width';
     }
     if(empty($post_data['args']['height'])) {
-        $error[] = 'height cannot be empty';
+        $error[] = 'height';
     }
     
     if(!empty($error)) {
         $result['callback'] = 'error';
-        $result['contextWrites']['to'] = implode(',', $error);
+        $result['contextWrites']['to']['status_code'] = "REQUIRED_FIELDS";
+        $result['contextWrites']['to']['status_msg'] = "Please, check and fill in required fields.";
+        $result['contextWrites']['to']['fields'] = $error;
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
     }
     
@@ -59,18 +61,42 @@ $app->post('/api/MicrosoftComputerVision/getThumbnail', function ($request, $res
             $result['contextWrites']['to'] = base64_encode($responseBody);
         } else {
             $result['callback'] = 'error';
-            $result['contextWrites']['to'] = $responseBody;
+            $result['contextWrites']['to']['status_code'] = 'API_ERROR';
+            $result['contextWrites']['to']['status_msg'] = json_decode($responseBody);
         }
 
     } catch (\GuzzleHttp\Exception\ClientException $exception) {
 
+        $responseBody = $exception->getResponse()->getBody()->getContents();
+        if(empty(json_decode($responseBody))) {
+            $out = $responseBody;
+        } else {
+            $out = json_decode($responseBody);
+        }
+        $result['callback'] = 'error';
+        $result['contextWrites']['to']['status_code'] = 'API_ERROR';
+        $result['contextWrites']['to']['status_msg'] = $out;
+
+    } catch (GuzzleHttp\Exception\ServerException $exception) {
+
+        $responseBody = $exception->getResponse()->getBody()->getContents();
+        if(empty(json_decode($responseBody))) {
+            $out = $responseBody;
+        } else {
+            $out = json_decode($responseBody);
+        }
+        $result['callback'] = 'error';
+        $result['contextWrites']['to']['status_code'] = 'API_ERROR';
+        $result['contextWrites']['to']['status_msg'] = $out;
+
+    } catch (GuzzleHttp\Exception\ConnectException $exception) {
+
         $responseBody = $exception->getResponse()->getBody(true);
         $result['callback'] = 'error';
-        $result['contextWrites']['to'] = json_decode($responseBody);
+        $result['contextWrites']['to']['status_code'] = 'INTERNAL_PACKAGE_ERROR';
+        $result['contextWrites']['to']['status_msg'] = 'Something went wrong inside the package.';
 
     }
-    
-    
 
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
 });
