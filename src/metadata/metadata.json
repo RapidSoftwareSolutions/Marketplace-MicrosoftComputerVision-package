@@ -11,6 +11,7 @@
     },
     "blocks": [{
             "name": "analyzeImage",
+            "description": "This operation extracts a rich set of visual features based on the image content.",
             "args": [{
                     "name": "subscriptionKey",
                     "type": "credentials",
@@ -41,6 +42,7 @@
                 }]
         }, {
             "name": "describeImage",
+            "description": "This operation generates a description of an image in human readable language with complete sentences. The description is based on a collection of content tags, which are also returned by the operation. More than one description can be generated for each image. Descriptions are ordered by their confidence score. All descriptions are in English.",
             "args": [{
                     "name": "subscriptionKey",
                     "type": "credentials",
@@ -66,6 +68,7 @@
                 }]
         }, {
             "name": "getThumbnail",
+            "description": "This operation generates a thumbnail image with the user-specified width and height. By default, the service analyzes the image, identifies the region of interest (ROI), and generates smart cropping coordinates based on the ROI. Smart cropping helps when you specify an aspect ratio that differs from that of the input image.",
             "args": [{
                     "name": "subscriptionKey",
                     "type": "credentials",
@@ -101,6 +104,7 @@
                 }]
         }, {
             "name": "ocr",
+            "description": "Optical Character Recognition (OCR) detects text in an image and extracts the recognized characters into a machine-usable character stream.",
             "args": [{
                     "name": "subscriptionKey",
                     "type": "credentials",
@@ -131,6 +135,7 @@
                 }]
         }, {
             "name": "tagImage",
+            "description": "This operation generates a list of words, or tags, that are relevant to the content of the supplied image.",
             "args": [{
                     "name": "subscriptionKey",
                     "type": "credentials",
