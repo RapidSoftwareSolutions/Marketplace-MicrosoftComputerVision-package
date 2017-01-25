@@ -15,6 +15,6 @@ return [
             'path' => __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
-        'api_url' => 'https://api.projectoxford.ai/vision/v1.0/',
+        'api_url' => 'https://westus.api.cognitive.microsoft.com/vision/v1.0/',
     ],
 ];
