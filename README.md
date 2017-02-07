@@ -1,3 +1,5 @@
+[![](https://scdn.rapidapi.com/RapidAPI_banner.png)](https://rapidapi.com/package/MicrosoftComputerVision/functions?utm_source=RapidAPIGitHub_MicrosoftComputerVisionFunctions&utm_medium=button&utm_content=RapidAPI_GitHub)
+
 Microsoft Computer Vision package
 ===================
 
