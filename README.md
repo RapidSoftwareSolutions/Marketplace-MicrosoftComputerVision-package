@@ -13,10 +13,12 @@ Extract rich information from images and video.
 ## How to get credentials: 
 ---------------
 
- 1. Go to the [Service page](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api)
- 2. Create [Microsoft account](https://www.microsoft.com/cognitive-services/en-US/subscriptions) or log in. 
- 3. Choose "Computer Vision - Preview" to create new subscription
- 4. In **Key** section choose Key1 or Key2 and press <kbd>Show</kbd> or  <kbd>Copy</kbd>
+ 1. Go to the [Computer Vision Page](https://azure.microsoft.com/en-us/try/cognitive-services/?api=computer-vision)
+ 2. Click "Create"
+ [![](https://storage.cloud.google.com/rapid-misc-files/microsoft-compvis-create.png?_ga=1.35695456.1549410745.1490985190)
+ 3. Sign up or log in when prompted. 
+ 4. Choose "Computer Vision - Preview" to create new subscription
+ 5. In **Key** section choose Key1 or Key2. Copy one of these keys.
 
 
 
