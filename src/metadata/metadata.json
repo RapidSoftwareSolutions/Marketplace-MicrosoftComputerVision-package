@@ -1,158 +1,227 @@
 {
-    "package": "MicrosoftComputerVision",
-    "tagline": "Microsoft Computer Vision API Wrapper",
-    "description": "Extract rich information from images and video.",
-    "image": "http://logo.clearbit.com/microsoft.com",
-    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-MicrosoftComputerVision-package",
-    "keywords": ["AI", "API", "Microsoft", "artificial", "cognitive", "image", "images", "intelligence", "ocr", "video", "visual", "visuals"],
-    "accounts": {
-        "domain": "microsoft.com",
-        "credentials": ["subscriptionKey"]
+  "package": "MicrosoftComputerVision",
+  "tagline": "Microsoft Computer Vision API Wrapper",
+  "description": "Extract rich information from images and video.",
+  "image": "http://logo.clearbit.com/microsoft.com",
+  "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-MicrosoftComputerVision-package",
+  "keywords": [
+    "AI",
+    "API",
+    "Microsoft",
+    "artificial",
+    "cognitive",
+    "image",
+    "images",
+    "intelligence",
+    "ocr",
+    "video",
+    "visual",
+    "visuals"
+  ],
+  "accounts": {
+    "domain": "microsoft.com",
+    "credentials": [
+      "subscriptionKey"
+    ]
+  },
+  "blocks": [
+    {
+      "name": "analyzeImage",
+      "description": "This operation extracts a rich set of visual features based on the image content.",
+      "args": [
+        {
+          "name": "subscriptionKey",
+          "type": "credentials",
+          "info": "The api key obtained from Microsoft Cognitive Servisces.",
+          "required": true
+        },
+        {
+          "name": "image",
+          "type": "File",
+          "info": "Supported input methods: raw image binary or image URL.",
+          "required": true
+        },
+        {
+          "name": "details",
+          "type": "List",
+          "structure": {
+            "name": "detail",
+            "type": "String",
+            "info": "Detail"
+          },
+          "info": "An array indicating which domain-specific details to return. Valid visual feature types include: Celebrities.",
+          "required": false
+        },
+        {
+          "name": "visualFeatures",
+          "type": "List",
+          "structure": {
+            "name": "detail",
+            "type": "String",
+            "info": "Detail"
+          },
+          "info": "An array indicating what visual feature types to return. Valid visual feature types include: Categories, Tags, Description, Faces, Color, Adult.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
     },
-    "blocks": [{
-            "name": "analyzeImage",
-            "description": "This operation extracts a rich set of visual features based on the image content.",
-            "args": [{
-                    "name": "subscriptionKey",
-                    "type": "credentials",
-                    "info": "The api key obtained from Microsoft Cognitive Servisces.",
-                    "required": true
-                }, {
-                    "name": "image",
-                    "type": "File",
-                    "info": "Supported input methods: raw image binary or image URL.",
-                    "required": true
-                }, {
-                    "name": "details",
-                    "type": "String",
-                    "info": "A string indicating which domain-specific details to return. Multiple values should be comma-separated. Valid visual feature types include: Celebrities.",
-                    "required": false
-                }, {
-                    "name": "visualFeatures",
-                    "type": "String",
-                    "info": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Categories, Tags, Description, Faces, Color, Adult.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "describeImage",
-            "description": "This operation generates a description of an image in human readable language with complete sentences. The description is based on a collection of content tags, which are also returned by the operation. More than one description can be generated for each image. Descriptions are ordered by their confidence score. All descriptions are in English.",
-            "args": [{
-                    "name": "subscriptionKey",
-                    "type": "credentials",
-                    "info": "The api key obtained from Microsoft Cognitive Servisces.",
-                    "required": true
-                }, {
-                    "name": "image",
-                    "type": "File",
-                    "info": "Supported input methods: raw image binary or image URL.",
-                    "required": true
-                }, {
-                    "name": "maxCandidates",
-                    "type": "String",
-                    "info": "Maximum number of candidate descriptions to be returned. The default is 1.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "getThumbnail",
-            "description": "This operation generates a thumbnail image with the user-specified width and height. By default, the service analyzes the image, identifies the region of interest (ROI), and generates smart cropping coordinates based on the ROI. Smart cropping helps when you specify an aspect ratio that differs from that of the input image.",
-            "args": [{
-                    "name": "subscriptionKey",
-                    "type": "credentials",
-                    "info": "The api key obtained from Microsoft Cognitive Servisces.",
-                    "required": true
-                }, {
-                    "name": "image",
-                    "type": "File",
-                    "info": "Supported input methods: raw image binary or image URL.",
-                    "required": true
-                }, {
-                    "name": "width",
-                    "type": "Number",
-                    "info": "Width of the thumbnail. It must be between 1 and 1024. Recommended minimum of 50.",
-                    "required": true
-                }, {
-                    "name": "height",
-                    "type": "Number",
-                    "info": "Height of the thumbnail. It must be between 1 and 1024. Recommended minimum of 50.",
-                    "required": true
-                }, {
-                    "name": "smartCropping",
-                    "type": "String",
-                    "info": "Boolean flag for enabling smart cropping.",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "ocr",
-            "description": "Optical Character Recognition (OCR) detects text in an image and extracts the recognized characters into a machine-usable character stream.",
-            "args": [{
-                    "name": "subscriptionKey",
-                    "type": "credentials",
-                    "info": "The api key obtained from Microsoft Cognitive Servisces.",
-                    "required": true
-                }, {
-                    "name": "image",
-                    "type": "File",
-                    "info": "Supported input methods: raw image binary or image URL.",
-                    "required": true
-                }, {
-                    "name": "language",
-                    "type": "String",
-                    "info": "The BCP-47 language code of the text to be detected in the image.The default value is 'unk', then the service will auto detect the language of the text in the image. Supported languages: unk (AutoDetect), zh-Hans (ChineseSimplified), zh-Hant (ChineseTraditional), cs (Czech), da (Danish), nl (Dutch), en (English), fi (Finnish), fr (French), de (German), el (Greek), hu (Hungarian), it (Italian), Ja (Japanese), ko (Korean), nb (Norwegian), pl (Polish), pt (Portuguese, ru (Russian), es (Spanish), sv (Swedish), tr (Turkish).",
-                    "required": false
-                }, {
-                    "name": "detectOrientation",
-                    "type": "String",
-                    "info": "Whether detect the text orientation in the image. With detectOrientation=true the OCR service tries to detect the image orientation and correct it before further processing (e.g. if it's upside-down).",
-                    "required": false
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }, {
-            "name": "tagImage",
-            "description": "This operation generates a list of words, or tags, that are relevant to the content of the supplied image.",
-            "args": [{
-                    "name": "subscriptionKey",
-                    "type": "credentials",
-                    "info": "The api key obtained from Microsoft Cognitive Servisces.",
-                    "required": true
-                }, {
-                    "name": "image",
-                    "type": "File",
-                    "info": "Supported input methods: raw image binary or image URL.",
-                    "required": true
-                }],
-            "callbacks": [{
-                    "name": "error",
-                    "info": "Error"
-                }, {
-                    "name": "success",
-                    "info": "Success"
-                }]
-        }]
+    {
+      "name": "describeImage",
+      "description": "This operation generates a description of an image in human readable language with complete sentences. The description is based on a collection of content tags, which are also returned by the operation. More than one description can be generated for each image. Descriptions are ordered by their confidence score. All descriptions are in English.",
+      "args": [
+        {
+          "name": "subscriptionKey",
+          "type": "credentials",
+          "info": "The api key obtained from Microsoft Cognitive Servisces.",
+          "required": true
+        },
+        {
+          "name": "image",
+          "type": "File",
+          "info": "Supported input methods: raw image binary or image URL.",
+          "required": true
+        },
+        {
+          "name": "maxCandidates",
+          "type": "String",
+          "info": "Maximum number of candidate descriptions to be returned. The default is 1.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "getThumbnail",
+      "description": "This operation generates a thumbnail image with the user-specified width and height. By default, the service analyzes the image, identifies the region of interest (ROI), and generates smart cropping coordinates based on the ROI. Smart cropping helps when you specify an aspect ratio that differs from that of the input image.",
+      "args": [
+        {
+          "name": "subscriptionKey",
+          "type": "credentials",
+          "info": "The api key obtained from Microsoft Cognitive Servisces.",
+          "required": true
+        },
+        {
+          "name": "image",
+          "type": "File",
+          "info": "Supported input methods: raw image binary or image URL.",
+          "required": true
+        },
+        {
+          "name": "width",
+          "type": "Number",
+          "info": "Width of the thumbnail. It must be between 1 and 1024. Recommended minimum of 50.",
+          "required": true
+        },
+        {
+          "name": "height",
+          "type": "Number",
+          "info": "Height of the thumbnail. It must be between 1 and 1024. Recommended minimum of 50.",
+          "required": true
+        },
+        {
+          "name": "smartCropping",
+          "type": "Boolean",
+          "info": "Boolean flag for enabling smart cropping.",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "ocr",
+      "description": "Optical Character Recognition (OCR) detects text in an image and extracts the recognized characters into a machine-usable character stream.",
+      "args": [
+        {
+          "name": "subscriptionKey",
+          "type": "credentials",
+          "info": "The api key obtained from Microsoft Cognitive Servisces.",
+          "required": true
+        },
+        {
+          "name": "image",
+          "type": "File",
+          "info": "Supported input methods: raw image binary or image URL.",
+          "required": true
+        },
+        {
+          "name": "language",
+          "type": "String",
+          "info": "The BCP-47 language code of the text to be detected in the image.The default value is 'unk', then the service will auto detect the language of the text in the image. Supported languages: unk (AutoDetect), zh-Hans (ChineseSimplified), zh-Hant (ChineseTraditional), cs (Czech), da (Danish), nl (Dutch), en (English), fi (Finnish), fr (French), de (German), el (Greek), hu (Hungarian), it (Italian), Ja (Japanese), ko (Korean), nb (Norwegian), pl (Polish), pt (Portuguese, ru (Russian), es (Spanish), sv (Swedish), tr (Turkish).",
+          "required": false
+        },
+        {
+          "name": "detectOrientation",
+          "type": "String",
+          "info": "Whether detect the text orientation in the image. With detectOrientation=true the OCR service tries to detect the image orientation and correct it before further processing (e.g. if it's upside-down).",
+          "required": false
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    },
+    {
+      "name": "tagImage",
+      "description": "This operation generates a list of words, or tags, that are relevant to the content of the supplied image.",
+      "args": [
+        {
+          "name": "subscriptionKey",
+          "type": "credentials",
+          "info": "The api key obtained from Microsoft Cognitive Servisces.",
+          "required": true
+        },
+        {
+          "name": "image",
+          "type": "File",
+          "info": "Supported input methods: raw image binary or image URL.",
+          "required": true
+        }
+      ],
+      "callbacks": [
+        {
+          "name": "error",
+          "info": "Error"
+        },
+        {
+          "name": "success",
+          "info": "Success"
+        }
+      ]
+    }
+  ]
 }
