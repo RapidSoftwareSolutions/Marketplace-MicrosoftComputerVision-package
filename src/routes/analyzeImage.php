@@ -29,7 +29,7 @@ $app->post('/api/MicrosoftComputerVision/analyzeImage', function ($request, $res
     
     $query = [];
     if(!empty($post_data['args']['details'])) {
-        if (preg_match('^\[(.*?)\]^', $post_data['args']['details'])) {
+        if (is_array($post_data['args']['details'])) {
             $query['visualFeatures'] = implode(',', $post_data['args']['details']);
         }
         else {
@@ -37,7 +37,7 @@ $app->post('/api/MicrosoftComputerVision/analyzeImage', function ($request, $res
         }
     }
     if(!empty($post_data['args']['visualFeatures'])) {
-        if (preg_match('^\[(.*?)\]^', $post_data['args']['visualFeatures'])) {
+        if (is_array($post_data['args']['visualFeatures'])) {
             $query['visualFeatures'] = implode(',', $post_data['args']['visualFeatures']);
         }
         else {
