@@ -29,19 +29,19 @@ $app->post('/api/MicrosoftComputerVision/analyzeImage', function ($request, $res
     
     $query = [];
     if(!empty($post_data['args']['details'])) {
-        if (preg_match('~^([a-z0-9]+,)+$~i', $post_data['args']['details'])) {
-            $query['visualFeatures'] = $post_data['args']['details'];
+        if (preg_match('^\[(.*?)\]^', $post_data['args']['details'])) {
+            $query['visualFeatures'] = implode(',', $post_data['args']['details']);
         }
         else {
-            $query['visualFeatures'] = implode(',', $post_data['args']['details']);
+            $query['visualFeatures'] = $post_data['args']['details'];
         }
     }
     if(!empty($post_data['args']['visualFeatures'])) {
-        if (preg_match('~^([a-z0-9]+,)+$~i', $post_data['args']['visualFeatures'])) {
-            $query['visualFeatures'] = $post_data['args']['visualFeatures'];
+        if (preg_match('^\[(.*?)\]^', $post_data['args']['visualFeatures'])) {
+            $query['visualFeatures'] = implode(',', $post_data['args']['visualFeatures']);
         }
         else {
-        $query['visualFeatures'] = implode(',', $post_data['args']['visualFeatures']);
+            $query['visualFeatures'] = $post_data['args']['visualFeatures'];
         }
     }
     
