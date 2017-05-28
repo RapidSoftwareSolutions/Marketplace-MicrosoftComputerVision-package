@@ -43,23 +43,23 @@
         },
         {
           "name": "details",
-          "type": "Array",
-          "structure": [{
+          "type": "List",
+          "structure": {
             "name": "detail",
             "type": "String",
             "info": "Detail"
-          }],
+          },
           "info": "An array indicating which domain-specific details to return. Valid visual feature types include: Celebrities.",
           "required": false
         },
         {
           "name": "visualFeatures",
-          "type": "Array",
-          "structure": [{
+          "type": "List",
+          "structure": {
             "name": "detail",
             "type": "String",
             "info": "Detail"
-          }],
+          },
           "info": "An array indicating what visual feature types to return. Valid visual feature types include: Categories, Tags, Description, Faces, Color, Adult.",
           "required": false
         }
