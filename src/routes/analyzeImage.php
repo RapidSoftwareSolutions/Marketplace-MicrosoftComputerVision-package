@@ -29,10 +29,10 @@ $app->post('/api/MicrosoftComputerVision/analyzeImage', function ($request, $res
     
     $query = [];
     if(!empty($post_data['args']['details'])) {
-        $query['details'] = implode(',', $post_data['args']['details']);
+        $query['visualFeatures'] = $post_data['args']['visualFeatures'];
     }
     if(!empty($post_data['args']['visualFeatures'])) {
-        $query['visualFeatures'] = implode(',', $post_data['args']['visualFeatures']);
+        $query['visualFeatures'] = $post_data['args']['visualFeatures'];
     }
     
     $headers['Ocp-Apim-Subscription-Key'] = $post_data['args']['subscriptionKey'];
