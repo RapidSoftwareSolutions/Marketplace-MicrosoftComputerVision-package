@@ -30,10 +30,10 @@ $app->post('/api/MicrosoftComputerVision/analyzeImage', function ($request, $res
     $query = [];
     if(!empty($post_data['args']['details'])) {
         if (is_array($post_data['args']['details'])) {
-            $query['visualFeatures'] = implode(',', $post_data['args']['details']);
+            $query['details'] = implode(',', $post_data['args']['details']);
         }
         else {
-            $query['visualFeatures'] = $post_data['args']['details'];
+            $query['details'] = $post_data['args']['details'];
         }
     }
     if(!empty($post_data['args']['visualFeatures'])) {
