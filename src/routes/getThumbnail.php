@@ -43,9 +43,10 @@ $app->post('/api/MicrosoftComputerVision/getThumbnail', function ($request, $res
     $headers['Content-Type'] = 'application/json';
     $query_str = $settings['api_url'] . 'generateThumbnail';
     $body['url'] = $post_data['args']['image'];
-    
-    $client = $this->httpClient;
 
+    $fileName = array_pop(explode("/", $post_data['args']['image']));
+
+    $client = $this->httpClient;
     try {
 
         $resp = $client->post( $query_str, 
@@ -55,48 +56,45 @@ $app->post('/api/MicrosoftComputerVision/getThumbnail', function ($request, $res
                 'headers' => $headers,
                 'verify' => false
             ]);
-        $responseBody = $resp->getBody()->getContents();
-        if(!empty($responseBody)) {
-            $result['callback'] = 'success';
-            $result['contextWrites']['to'] = base64_encode($responseBody);
+        $responseBody = $resp->getBody();
+
+        if ($resp->getStatusCode() == 200) {
+
+            $size = $resp->getHeader('Content-Length')[0];
+
+            $uploadServiceResponse = $client->post($settings['uploadServiceUrl'], [
+                'multipart' => [
+                    [
+                        'name' => 'length',
+                        'contents' => $size
+                    ],
+                    [
+                        "name" => "file",
+                        "filename" => $fileName,
+                        "contents" => $responseBody
+                    ]
+                ]
+            ]);
+            $uploadServiceResponseBody = $uploadServiceResponse->getBody()->getContents();
+
+            if ($uploadServiceResponse->getStatusCode() == 200) {
+                $result['callback'] = 'success';
+                $result['contextWrites']['to'] = json_decode($uploadServiceResponse->getBody());
+            }
+            else {
+                $result['callback'] = 'error';
+                $result['contextWrites']['to']['status_code'] = 'API_ERROR';
+                $result['contextWrites']['to']['status_msg'] = is_array($uploadServiceResponseBody) ? $uploadServiceResponseBody : json_decode($uploadServiceResponseBody);
+            }
         } else {
             $result['callback'] = 'error';
             $result['contextWrites']['to']['status_code'] = 'API_ERROR';
-            $result['contextWrites']['to']['status_msg'] = json_decode($responseBody);
+            $result['contextWrites']['to']['status_msg'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
         }
-
-    } catch (\GuzzleHttp\Exception\ClientException $exception) {
-
-        $responseBody = $exception->getResponse()->getBody()->getContents();
-        if(empty(json_decode($responseBody))) {
-            $out = $responseBody;
-        } else {
-            $out = json_decode($responseBody);
-        }
+    } catch (\GuzzleHttp\Exception\BadResponseException $exception) {
         $result['callback'] = 'error';
         $result['contextWrites']['to']['status_code'] = 'API_ERROR';
-        $result['contextWrites']['to']['status_msg'] = $out;
-
-    } catch (GuzzleHttp\Exception\ServerException $exception) {
-
-        $responseBody = $exception->getResponse()->getBody()->getContents();
-        if(empty(json_decode($responseBody))) {
-            $out = $responseBody;
-        } else {
-            $out = json_decode($responseBody);
-        }
-        $result['callback'] = 'error';
-        $result['contextWrites']['to']['status_code'] = 'API_ERROR';
-        $result['contextWrites']['to']['status_msg'] = $out;
-
-    } catch (GuzzleHttp\Exception\ConnectException $exception) {
-
-        $responseBody = $exception->getResponse()->getBody(true);
-        $result['callback'] = 'error';
-        $result['contextWrites']['to']['status_code'] = 'INTERNAL_PACKAGE_ERROR';
-        $result['contextWrites']['to']['status_msg'] = 'Something went wrong inside the package.';
-
+        $result['contextWrites']['to']['status_msg'] = json_decode($exception->getResponse()->getBody());
     }
-
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
 });
