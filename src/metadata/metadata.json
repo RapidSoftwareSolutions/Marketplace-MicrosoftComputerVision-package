@@ -178,13 +178,13 @@
           "name": "language",
           "type": "Select",
           "options": ["unk","zh-Hans","zh-Hant","cs","da","nl","en","fi","fr","de","el","hu","it","Ja","ko","nb","pl","pt","ru","es","sv","tr"],
-          "info": "The BCP-47 language code of the text to be detected in the image.The default value is 'unk', then the service will auto detect the language of the text in the image. Supported languages: unk (AutoDetect), zh-Hans (ChineseSimplified), zh-Hant (ChineseTraditional), cs (Czech), da (Danish), nl (Dutch), en (English), fi (Finnish), fr (French), de (German), el (Greek), hu (Hungarian), it (Italian), Ja (Japanese), ko (Korean), nb (Norwegian), pl (Polish), pt (Portuguese, ru (Russian), es (Spanish), sv (Swedish), tr (Turkish).",
+          "info": "The BCP-47 language code of the text to be detected in the image.The default value is 'unk', then the service will auto detect the language of the text in the image.",
           "required": false
         },
         {
           "name": "detectOrientation",
           "type": "Select",
-          "options": ["0"],
+          "options": ["true","false"],
           "info": "Whether detect the text orientation in the image. With detectOrientation=true the OCR service tries to detect the image orientation and correct it before further processing (e.g. if it's upside-down).",
           "required": false
         }

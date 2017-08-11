@@ -32,7 +32,7 @@ $app->post('/api/MicrosoftComputerVision/ocr', function ($request, $response, $a
         $query['language'] = $post_data['args']['language'];
     }
     if(!empty($post_data['args']['detectOrientation'])) {
-        $query['language'] = $post_data['args']['detectOrientation'];
+        $query['detectOrientation'] = $post_data['args']['detectOrientation'];
     }
     
     $headers['Ocp-Apim-Subscription-Key'] = $post_data['args']['subscriptionKey'];
