@@ -39,11 +39,11 @@ $app->post('/api/MicrosoftComputerVision/getThumbnail', function ($request, $res
         $query['smartCropping'] = $post_data['args']['smartCropping'];
     }
 
-    $body['url'] = $post_data['args']['image'];
-
     $headers['Ocp-Apim-Subscription-Key'] = $post_data['args']['subscriptionKey'];
     $headers['Content-Type'] = 'application/json';
     $query_str = $settings['api_url'] . 'generateThumbnail';
+    $body['url'] = $post_data['args']['image'];
+
     $fileName = array_pop(explode("/", $post_data['args']['image']));
 
     $client = $this->httpClient;
@@ -60,13 +60,17 @@ $app->post('/api/MicrosoftComputerVision/getThumbnail', function ($request, $res
 
         if ($resp->getStatusCode() == 200) {
 
-            //$size = $resp->getHeader('Content-Length')[0];
+            $size = $resp->getHeader('Content-Length')[0];
 
             $uploadServiceResponse = $client->post($settings['uploadServiceUrl'], [
                 'multipart' => [
                     [
+                        'name' => 'length',
+                        'contents' => $size
+                    ],
+                    [
                         "name" => "file",
-                        "filename" => $fileName,
+                        "filename" => "test.jpg",
                         "contents" => $responseBody
                     ]
                 ]
