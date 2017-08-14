@@ -60,32 +60,35 @@ $app->post('/api/MicrosoftComputerVision/getThumbnail', function ($request, $res
 
         if ($resp->getStatusCode() == 200) {
 
-            $size = $resp->getHeader('Content-Length')[0];
+            $result['callback'] = 'success';
+            $result['contextWrites']['to'] = "ok";
 
-            $uploadServiceResponse = $client->post($settings['uploadServiceUrl'], [
-                'multipart' => [
-                    [
-                        'name' => 'length',
-                        'contents' => $size
-                    ],
-                    [
-                        "name" => "file",
-                        "filename" => "test.jpg",
-                        "contents" => $responseBody
-                    ]
-                ]
-            ]);
-            $uploadServiceResponseBody = $uploadServiceResponse->getBody()->getContents();
-
-            if ($uploadServiceResponse->getStatusCode() == 200) {
-                $result['callback'] = 'success';
-                $result['contextWrites']['to'] = json_decode($uploadServiceResponse->getBody());
-            }
-            else {
-                $result['callback'] = 'error';
-                $result['contextWrites']['to']['status_code'] = 'API_ERROR';
-                $result['contextWrites']['to']['status_msg'] = is_array($uploadServiceResponseBody) ? $uploadServiceResponseBody : json_decode($uploadServiceResponseBody);
-            }
+//            $size = $resp->getHeader('Content-Length')[0];
+//
+//            $uploadServiceResponse = $client->post($settings['uploadServiceUrl'], [
+//                'multipart' => [
+//                    [
+//                        'name' => 'length',
+//                        'contents' => $size
+//                    ],
+//                    [
+//                        "name" => "file",
+//                        "filename" => "test.jpg",
+//                        "contents" => $responseBody
+//                    ]
+//                ]
+//            ]);
+//            $uploadServiceResponseBody = $uploadServiceResponse->getBody()->getContents();
+//
+//            if ($uploadServiceResponse->getStatusCode() == 200) {
+//                $result['callback'] = 'success';
+//                $result['contextWrites']['to'] = json_decode($uploadServiceResponse->getBody());
+//            }
+//            else {
+//                $result['callback'] = 'error';
+//                $result['contextWrites']['to']['status_code'] = 'API_ERROR';
+//                $result['contextWrites']['to']['status_msg'] = is_array($uploadServiceResponseBody) ? $uploadServiceResponseBody : json_decode($uploadServiceResponseBody);
+//            }
         } else {
             $result['callback'] = 'error';
             $result['contextWrites']['to']['status_code'] = 'API_ERROR';
