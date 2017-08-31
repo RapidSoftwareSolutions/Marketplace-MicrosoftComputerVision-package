@@ -24,6 +24,13 @@
       "subscriptionKey"
     ]
   },
+  "steps": [
+      "Go to https://azure.microsoft.com/en-us/try/cognitive-services/?api=computer-vision",
+      "Click 'Create' ",
+      "Sign up or log in when prompted",
+      "Choose 'Computer Vision - Preview' to create new subscription",
+      "In Key section choose Key1 or Key2. Copy one of these keys"
+  ],
   "blocks": [
     {
       "name": "analyzeImage",
