@@ -24,6 +24,13 @@
       "subscriptionKey"
     ]
   },
+  "steps": [
+      "Go to https://azure.microsoft.com/en-us/try/cognitive-services/?api=computer-vision",
+      "Click 'Create' ",
+      "Sign up or log in when prompted",
+      "Choose 'Computer Vision - Preview' to create new subscription",
+      "In Key section choose Key1 or Key2. Copy one of these keys"
+  ],
   "blocks": [
     {
       "name": "analyzeImage",
@@ -46,10 +53,11 @@
           "type": "List",
           "structure": {
             "name": "detail",
-            "type": "String",
+            "type": "Select",
+            "options": ["Celebrities","Landmarks"],
             "info": "Detail"
           },
-          "info": "An array indicating which domain-specific details to return. Valid visual feature types include: Celebrities.",
+          "info": "A string indicating which domain-specific details to return. Multiple values should be comma-separated. Must be: Celebrities or Landmarks",
           "required": false
         },
         {
@@ -57,7 +65,8 @@
           "type": "List",
           "structure": {
             "name": "detail",
-            "type": "String",
+            "type": "Select",
+            "options": ["Categories","Tags","Description","Faces","Color","Adult"],
             "info": "Detail"
           },
           "info": "An array indicating what visual feature types to return. Valid visual feature types include: Categories, Tags, Description, Faces, Color, Adult.",
@@ -99,7 +108,7 @@
         },
         {
           "name": "maxCandidates",
-          "type": "String",
+          "type": "Number",
           "info": "Maximum number of candidate descriptions to be returned. The default is 1.",
           "required": false
         },
@@ -151,7 +160,8 @@
         },
         {
           "name": "smartCropping",
-          "type": "Boolean",
+          "type": "Select",
+          "options": ["true", "false"],
           "info": "Boolean flag for enabling smart cropping.",
           "required": false
         },
@@ -191,13 +201,15 @@
         },
         {
           "name": "language",
-          "type": "String",
-          "info": "The BCP-47 language code of the text to be detected in the image.The default value is 'unk', then the service will auto detect the language of the text in the image. Supported languages: unk (AutoDetect), zh-Hans (ChineseSimplified), zh-Hant (ChineseTraditional), cs (Czech), da (Danish), nl (Dutch), en (English), fi (Finnish), fr (French), de (German), el (Greek), hu (Hungarian), it (Italian), Ja (Japanese), ko (Korean), nb (Norwegian), pl (Polish), pt (Portuguese, ru (Russian), es (Spanish), sv (Swedish), tr (Turkish).",
+          "type": "Select",
+          "options": ["unk","zh-Hans","zh-Hant","cs","da","nl","en","fi","fr","de","el","hu","it","Ja","ko","nb","pl","pt","ru","es","sv","tr"],
+          "info": "The BCP-47 language code of the text to be detected in the image.The default value is 'unk', then the service will auto detect the language of the text in the image.",
           "required": false
         },
         {
           "name": "detectOrientation",
-          "type": "String",
+          "type": "Select",
+          "options": ["true","false"],
           "info": "Whether detect the text orientation in the image. With detectOrientation=true the OCR service tries to detect the image orientation and correct it before further processing (e.g. if it's upside-down).",
           "required": false
         },
