@@ -29,6 +29,9 @@ $app->post('/api/MicrosoftComputerVision/tagImage', function ($request, $respons
     
     $headers['Ocp-Apim-Subscription-Key'] = $post_data['args']['subscriptionKey'];
     $headers['Content-Type'] = 'application/json';
+    if (!empty($post_data['args']['region'])) {
+        $settings['api_url'] = "https://" . $post_data['args']['region'] . ".api.cognitive.microsoft.com/vision/v1.0/";
+    }
     $query_str = $settings['api_url'] . 'tag';
     $body['url'] = $post_data['args']['image'];
     
