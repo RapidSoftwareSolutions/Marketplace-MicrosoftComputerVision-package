@@ -57,13 +57,14 @@ $app->post('/api/MicrosoftComputerVision/analyzeImage', function ($request, $res
 
     try {
 
-        $resp = $client->post( $query_str, 
+        $resp = $client->post($query_str,
             [
                 'query' => $query,
                 'body' => json_encode($body),
                 'headers' => $headers,
                 'verify' => false
             ]);
+
         $responseBody = $resp->getBody()->getContents();
         if(!empty(json_decode($responseBody))) {
             $result['callback'] = 'success';
@@ -100,7 +101,6 @@ $app->post('/api/MicrosoftComputerVision/analyzeImage', function ($request, $res
 
     } catch (GuzzleHttp\Exception\ConnectException $exception) {
 
-        $responseBody = $exception->getResponse()->getBody(true);
         $result['callback'] = 'error';
         $result['contextWrites']['to']['status_code'] = 'INTERNAL_PACKAGE_ERROR';
         $result['contextWrites']['to']['status_msg'] = 'Something went wrong inside the package.';
